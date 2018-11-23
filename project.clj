@@ -1,6 +1,6 @@
-(defproject com.damballa/abracad "0.4.14-SNAPSHOT"
+(defproject ovotech/abracad "0.4.14"
   :description "De/serialize Clojure data structures with Avro."
-  :url "http://github.com/damballa/abracad"
+  :url "https://github.com/ovotech/abracad"
   :licenses [{:name "Eclipse Public License"
               :url "http://www.eclipse.org/legal/epl-v10.html"}
              {:name "Apache License, Version 2.0"
@@ -23,4 +23,8 @@
              :clojure-1-7 {:dependencies
                            [[org.clojure/clojure "1.7.0"]]}
              :clojure-1-8 {:dependencies
-                           [[org.clojure/clojure "1.8.0"]]}})
+                           [[org.clojure/clojure "1.8.0"]]}
+             :ci {:deploy-repositories [["clojars" {:url           "https://clojars.org/repo"
+                                                    :username      :env ;; LEIN_USERNAME
+                                                    :password      :env ;; LEIN_PASSWORD
+                                                    :sign-releases false}]]}})
