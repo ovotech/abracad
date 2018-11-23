@@ -1,0 +1,47 @@
+# secrets:
+# LEIN_USERNAME
+# LEIN_PASSWORD
+defaults:
+  docker:
+    - image: circleci/clojure:lein-2.8.1
+  environment:
+    LEIN_ROOT: "true"
+
+version: 2
+jobs:
+  unit_test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "project.clj" }}
+          - v1-dependencies-
+      - run: lein deps
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "project.clj" }}
+      - run: lein test-all
+
+  publish:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "project.clj" }}
+          - v1-dependencies-
+      - run: lein with-profile ci deploy clojars
+
+workflows:
+  version: 2
+  kafka-avro-confluent:
+    jobs:
+      - unit_test
+      - publish:
+          requires:
+            - unit_test
+          filters:
+            branches:
+              only: master
