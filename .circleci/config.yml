@@ -1,7 +1,7 @@
 # secrets:
 # LEIN_USERNAME
 # LEIN_PASSWORD
-defaults:
+&defaults:
   docker:
     - image: circleci/clojure:lein-2.8.1
   environment:
