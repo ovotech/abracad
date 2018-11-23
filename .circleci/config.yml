@@ -38,7 +38,7 @@ jobs:
 
 workflows:
   version: 2
-  kafka-avro-confluent:
+  abracad:
     jobs:
       - unit_test
       - publish:
