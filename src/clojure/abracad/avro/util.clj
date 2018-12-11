@@ -4,7 +4,7 @@
 
 (def ^:dynamic *mangle-names*
   "When true, record field names will be mangled during schema parse and
-record de/serialization.  Default value is `true`."
+record de/serialization.  Default value is `false`."
   true)
 
 (defmacro returning

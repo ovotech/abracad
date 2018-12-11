@@ -79,12 +79,13 @@ The Avro type deserialization mappings are as follows:
     indicating the Avro schema name
 
 The Avro specification allows field names to contain the `_` character but
-disallows the `-` character.  Clojure keywords frequently contain `-` but rarely
-contain `_`.  Abracad attempts to work around this difference by mapping `_` in
-Avro field names to `-` in Clojure symbols and vice-versa.  The current
+disallows the `-` character. Clojure keywords frequently contain `-` but rarely
+contain `_`. Abracad can attempt to work around this difference by mapping `_`
+in Avro field names to `-` in Clojure symbols and vice-versa. The current
 implementation of this conversion does *not* handle keywords containing `_`
-instead, which is probably a bug.  This mangling may be disabled by binding
-`abracad.avro.util/*mangle-names*` to `false`.
+instead, which is probably a bug. This mangling may be optionally enabled by
+binding `abracad.avro.util/*mangle-names*` to `true` (but you probably
+shouldn't).
 
 #### Record de/serialization tweaking
 
