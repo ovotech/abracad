@@ -1,4 +1,4 @@
-(defproject ovotech/abracad "0.4.14"
+(defproject ovotech/abracad "0.4.15"
   :description "De/serialize Clojure data structures with Avro."
   :url "https://github.com/ovotech/abracad"
   :licenses [{:name "Eclipse Public License"
