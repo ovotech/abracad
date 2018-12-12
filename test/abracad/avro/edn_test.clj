@@ -1,9 +1,10 @@
 (ns abracad.avro.edn-test
-  (:require [clojure.test :refer :all]
-            [abracad.avro :as avro]
-            [abracad.avro.edn :as aedn])
-  (:import [clojure.lang PersistentQueue]
-           [java.net InetAddress]))
+  (:require [abracad.avro :as avro]
+            [abracad.avro.edn :as aedn]
+            [abracad.avro.util :as au]
+            [clojure.test :refer :all])
+  (:import clojure.lang.PersistentQueue
+           java.net.InetAddress))
 
 ;; Stress-test data from nippy
 ;; - https://github.com/ptaoussanis/nippy
@@ -62,6 +63,15 @@
       (is (= (get stress-data kw) (get rted-data kw))))
     (is (= (-> stress-data :bytes seq) (-> rted-data :bytes seq)))
     (is (= (-> stress-data :meta meta) (-> rted-data :meta meta)))))
+
+(deftest test-no-mangle-names
+  (binding [au/*mangle-names* false]
+    (let [schema (aedn/new-schema)
+          data {:fooBar "foo"}
+          rted-data (->> data
+                         (avro/binary-encoded schema)
+                         (avro/decode schema))]
+      (is (= data rted-data)))))
 
 (def ip-address-schema
   {:type :record
