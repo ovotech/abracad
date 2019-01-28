@@ -1,6 +1,3 @@
-# secrets:
-# LEIN_USERNAME
-# LEIN_PASSWORD
 aliases:
   - &defaults
     working_directory: ~/abracad
@@ -26,24 +23,8 @@ jobs:
           key: v1-dependencies-{{ checksum "project.clj" }}
       - run: lein test-all
 
-  publish:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "project.clj" }}
-          - v1-dependencies-
-      - run: lein with-profile ci deploy clojars
-
 workflows:
   version: 2
   abracad:
     jobs:
       - unit_test
-      - publish:
-          requires:
-            - unit_test
-          filters:
-            branches:
-              only: master
