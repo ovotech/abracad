@@ -19,11 +19,6 @@ Leiningen `project.clj`:
 [ovotech/abracad "0.4.15"]
 ```
 
-## Deployment
-```
-lein with-profile ci deploy clojars
-```
-
 ## Usage
 
 Example usage follows; [detailed API documentation][api] available,
