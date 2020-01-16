@@ -1,4 +1,4 @@
-(defproject ovotech/abracad "0.4.15"
+(defproject ovotech/abracad "0.4.16"
   :description "De/serialize Clojure data structures with Avro."
   :url "https://github.com/ovotech/abracad"
   :licenses [{:name "Eclipse Public License"
@@ -10,8 +10,9 @@
   :java-source-paths ["src/java"]
   :javac-options ["-target" "1.8" "-source" "1.8"]
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.apache.avro/avro "1.8.0"]
-                 [cheshire/cheshire "5.6.1"]]
+                 [org.apache.avro/avro "1.9.1"]
+                 [cheshire/cheshire "5.6.1"]
+                 [org.xerial.snappy/snappy-java "1.1.7.3"]]
   :plugins [[codox/codox "0.6.4"]]
   :codox {:include [abracad.avro abracad.avro.edn]}
   :aliases {"test-all" ["with-profile" ~(str "clojure-1-6:"
